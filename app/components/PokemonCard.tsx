@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Pressable, Text, View, StyleSheet } from "react-native";
+import { router } from "expo-router";
 
 interface PokemonCardProps {
   name: string;
@@ -11,13 +12,27 @@ export default function PokemonCard(props: PokemonCardProps) {
   console.log(id);
   const pokemonImageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   return (
-    <View>
+    <Pressable
+      onPress={() => router.push("/new_screen")}
+      style={({ pressed }) => [
+        styles.PressableStyle,
+        pressed && { opacity: 0.5 }
+      ]}
+    >
       <Image
         source={{ uri: pokemonImageURL }}
         style={{ width: 100, height: 100 }}
       ></Image>
       <Text>{props.name}</Text>
       <Text>{props.url}</Text>
-    </View>
+    </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  PressableStyle: {
+    borderWidth: 1,
+    alignItems: "center",
+    backgroundColor: "#10c5e5",
+  },
+});

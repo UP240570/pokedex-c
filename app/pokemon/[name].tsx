@@ -5,7 +5,7 @@ import { ScrollView, Text } from "react-native";
 export default function PokemonDetailScreen() {
   const params = useLocalSearchParams();
   const [pokemonData, setPokemonData] = useState(null);
-  
+
   useEffect(() => {
     console.log("Entre en pantalla");
     getPokemonData();
@@ -31,7 +31,6 @@ export default function PokemonDetailScreen() {
   };
   return (
     <ScrollView>
-      
       <Text>{params.name}</Text>
       <Text>{JSON.stringify(pokemonData)}</Text>
     </ScrollView>

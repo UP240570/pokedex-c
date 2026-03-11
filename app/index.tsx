@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, TextInput } from 'react-native';
 import PokemonCard from "./components/PokemonCard";
 
-interface Pokemon{
-  name : string;
-  url : string;
+interface Pokemon {
+  name: string;
+  url: string;
 }
 
 export default function Index() {
@@ -33,8 +33,24 @@ export default function Index() {
     }
   };
 
+  const filterPokemon = (text: string) => {
+
+    if (text == "") {
+      getPokemons();
+      return;
+    }
+    const arrayFiltered = results.filter((pokemon) => pokemon.name.includes(text));
+    setResults(arrayFiltered)
+  };
+
+
+  
+
   return (
-    <ScrollView>
+    <ScrollView>      
+
+      <TextInput onChangeText={filterPokemon} placeholder="Search Pokémon..." />
+
       {results.map((item) => {
         return (
           <PokemonCard
@@ -47,3 +63,4 @@ export default function Index() {
     </ScrollView>
   );
 }
+
